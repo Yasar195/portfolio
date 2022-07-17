@@ -1,0 +1,72 @@
+.container {
+    padding: 0.5rem 1rem;
+}
+  
+.intro{
+    width: 90%;
+}
+  
+.project{
+    height: 30%;
+    display: flex;
+    justify-content: space-evenly;
+}
+  
+.project div{
+    width: 100%;
+}
+  
+.allprojects{
+    width: 100%;
+    height: fit-content;
+}
+  
+.projects{
+    text-align: center;
+    font-size: 4rem;
+    -webkit-text-stroke: 1px white;
+    color: transparent;
+}
+  
+.self{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: rgb(230, 0, 234);
+}
+  
+.who{
+    position: relative;
+    left: 40%;
+    color: white;
+    width: 40%;
+}
+  
+.who p{
+    font-size: 0.5rem;
+    opacity: 0.4;
+}
+  
+.self p{
+    font-size: 0.4rem;
+}
+  
+.intro h1{
+    color: white;
+    font-size: 2rem;
+}
+  
+@media  (max-width: 1050px) {
+   .self{
+    width: 60%;
+   }
+}
+  
+@media  (max-width: 620px) {
+    .self{
+     width: 80%;
+    }
+}
+   
+   

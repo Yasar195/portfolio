@@ -1,0 +1,20 @@
+.email{
+    width: 100%;
+    display: flex;
+}
+
+.comp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glogo{
+    width: 30%;
+    border: 2px solid white;
+}
+
+.id{
+    width: 70%;
+    border: 2px solid white;
+}

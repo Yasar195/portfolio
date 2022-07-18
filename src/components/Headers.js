@@ -6,18 +6,18 @@ const Headers = () => {
     return(
         <div className="header">
             <div className="socials">
-                <div className="logo">
+                <a href='https://twitter.com/Yasar97280710'><div className="logo">
                     <FiTwitter size={'20px'}/>
-                </div>
-                <div className="logo">
+                </div></a>
+                <a href="https://www.instagram.com/imyasar7/"><div className="logo">
                     <FiInstagram size={'20px'}/>
-                </div>
-                <div className="logo">
+                </div></a>
+                <a href='https://www.linkedin.com/in/yasar-arafath-091383191/'><div className="logo">
                     <FiLinkedin size={'20px'}/>
-                </div>
-                <div className="logo">
+                </div></a>
+                <a href="https://github.com/Yasar195"><div className="logo">
                     <FiGithub size={"20px"}/>
-                </div>
+                </div></a>
             </div>
             <div className="btn">
                 <p>About & Services</p>

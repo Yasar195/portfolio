@@ -10,14 +10,18 @@ const Projects = () => {
             <h2 className='pname'>A real time chat application</h2>
             <p className="exp">A backend project build using express js and socket.io</p>
             <div className='links'>
-                <div className='lbtn'>
-                    <FiGithub size={"13px"}/>
-                    <p>Browse code</p>
-                </div>
-                <div className='lbtn'>
-                    <CgWebsite size={"13px"}/>
-                    <p>Visit application</p>
-                </div>
+                <a href='https://github.com/Yasar195/chat'>
+                    <div className='lbtn'>
+                        <FiGithub size={"13px"}/>
+                        <p>Browse code</p>
+                    </div>
+                </a>
+                <a href="https://ancient-journey-58990.herokuapp.com/">
+                    <div className='lbtn'>
+                        <CgWebsite size={"13px"}/>
+                        <p>Visit application</p>
+                    </div>
+                </a>
             </div>
         </div>
     )

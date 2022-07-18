@@ -27,6 +27,34 @@
     -webkit-text-stroke: 1px white;
     color: transparent;
 }
+
+.left{
+    background-color:rgb(230, 0, 234);
+    padding: 0.4rem;
+}
+
+.left h2{
+    font-size: 0.7rem;
+}
+
+.left p{
+    font-size: 0.6rem;
+}
+
+.footer{
+    display: flex;
+}
+
+.footer div{
+    width: 100%;    
+}
+
+.services{
+    text-align: center;
+    font-size: 2rem;
+    -webkit-text-stroke: 1px white;
+    color: transparent;
+}
   
 .self{
     width: 40%;

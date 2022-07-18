@@ -39,7 +39,18 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <h1 className="projects">Services & Contact</h1>
+      <h1 className="services">Services & Contact</h1>
+      <div className='footer'>
+        <div className="left">
+          <h2>i'm a full stack developer</h2>
+          <p>
+            i primarily focused on full stack development which is buiding applications end to end.
+          </p>
+        </div>
+        <div>
+
+        </div>
+      </div>
     </div>
   )
 }

@@ -9,7 +9,7 @@ const Email = () => {
             whileHover={{
                 scale:1.1,
                 cursor: 'pointer',
-                backgroundColor: 'rgba(230, 0, 234, 0.5)'
+                backgroundColor: 'rgba(237, 214, 0, 0.5)'
             }}
         
         >

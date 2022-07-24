@@ -10,7 +10,7 @@ const Email = () => {
 
     const copy = () => {
         navigator.clipboard.writeText("imyasar07@gmail.com");
-        setText("Mail id copied")
+        setText("Copied")
         setTimeout(()=> setText("yasar07@gmail.com"), 2000);
     }
 

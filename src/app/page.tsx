@@ -341,7 +341,7 @@ export default function Home() {
                             </div>
 
                             {/* Content */}
-                            <div className="bg-slate-50 rounded-lg p-4 shadow-sm">
+                            <div className="bg-slate-50 rounded-lg p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md">
                               <span className="text-sm font-medium text-slate-500">{item.period}</span>
                               <h3 className="text-lg font-semibold text-slate-800 mt-1">{item.role}</h3>
                               <p className="text-green-600 font-medium">{item.company}</p>

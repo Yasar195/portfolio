@@ -1,101 +1,298 @@
+"use client";
+
 import Image from "next/image";
+import photo from "../../public/artist-white.jpg";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [page, setPage] = useState("career");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const blogPosts = [
+    {
+      date: "2024 Jan 15",
+      title: "Building Scalable React Applications",
+      description: "Learn how to structure your React applications for scalability and maintainability. We'll cover best practices, state management, and performance optimization techniques.",
+      tags: ["React", "Architecture", "Performance"],
+      readTime: "8 min read",
+      link: "https://hashnode.com/your-blog-1"
+    },
+    {
+      date: "2023 Dec 28",
+      title: "Modern CSS Techniques You Should Know",
+      description: "Discover the latest CSS features and techniques that can revolutionize your web development workflow. From CSS Grid to Custom Properties, we'll explore it all.",
+      tags: ["CSS", "Web Development", "Frontend"],
+      readTime: "6 min read",
+      link: "https://hashnode.com/your-blog-2"
+    }
+  ];
+
+  const variants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    exit: { opacity: 0, y: 50, transition: { duration: 0.3 } },
+  };
+
+  const timelineVariants = {
+    hidden: { opacity: 0, height: 0 },
+    visible: { opacity: 1, height: "auto", transition: { duration: 0.5 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      transition: { delay: i * 0.2, duration: 0.3 },
+    }),
+  };
+
+  const careerHistory = [
+    {
+      period: "2023 jan - Present",
+      role: "Software Engineer",
+      company: "Bluecast Technologies",
+      description: "Working on full-stack web development projects using modern technologies.",
+      tech: ["React", "Next.js", "Node.js", "Tailwind CSS", "AWS"],
+    },
+    {
+      period: "2023 nov - 2024 jan",
+      role: "Junior Developer",
+      company: "Trinity skillactz",
+      description: "Worked",
+      tech: ["JavaScript", "HTML", "CSS", "Basic React", "PHP"],
+    }
+  ];
+
+  return (
+    <div className="h-screen bg-slate-100 p-4 sm:p-6 md:p-8">
+      <main className="mx-auto max-w-8xl">
+        <div className="bg-white rounded-lg shadow-2xl p-6 md:p-8">
+          <div className="flex flex-col md:flex-row md:gap-8 h-full">
+            {/* Left Section - Navigation & Content */}
+            <div className="w-full md:w-1/2 flex flex-col h-[calc(100vh-12rem)]">
+              {/* Navigation - Fixed */}
+              <nav className="bg-slate-100 rounded-lg p-4 mb-8 sticky top-0 z-10">
+                <div className="flex flex-wrap md:flex-nowrap justify-center gap-3">
+                  {["about", "blog", "career", "projects", "socials", "gallery"].map((item) => (
+                    <motion.button
+                      key={item}
+                      onClick={() => setPage(item)}
+                      className={`px-4 py-2 rounded-full font-semibold text-sm transition-colors
+                        ${page === item
+                          ? "bg-slate-300 text-slate-700"
+                          : "text-slate-600 hover:bg-slate-200"
+                        }`}
+                      whileTap={{ scale: 0.95, boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}  // Click animation
+                      whileHover={{ scale: 1.05 }}  // Hover effect for scaling up
+                    >
+                      {item.charAt(0).toUpperCase() + item.slice(1)}
+                    </motion.button>
+                  ))}
+                </div>
+              </nav>
+
+              {/* Content - Scrollable */}
+              <div className="flex-1 overflow-y-auto pr-4 -mr-4">
+                <AnimatePresence mode="wait">
+                  {page === "about" && (
+                    <motion.div
+                      key="about"
+                      variants={variants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      className="space-y-6 text-lg"
+                    >
+                      <p className="text-xl font-semibold text-slate-800">
+                        Hey there, I am{" "}
+                        <span className="text-green-600 font-bold">Yasar Arafath</span> 👋
+                      </p>
+
+                      <p className="text-slate-600 leading-relaxed">
+                        Welcome to my portfolio! I’m a passionate software engineer with a drive for solving real-world problems through elegant code. I specialize in full-stack web development, and I love creating seamless user experiences that are both functional and beautiful.
+                      </p>
+
+                      <p className="text-slate-600 leading-relaxed">
+                        With over <span className="text-green-600 font-semibold">1 year of experience</span> working with cutting-edge technologies like <span className="text-blue-600">React</span>, <span className="text-blue-600">Next.js</span>, and <span className="text-yellow-600">Node.js</span>, I have honed my skills in building scalable, efficient, and user-friendly web applications.
+                      </p>
+
+                      <div className="flex items-center space-x-3">
+                        <span className="font-medium text-slate-700">📍</span>
+                        <p className="text-slate-600">Currently based in <span className="font-semibold text-green-600">India</span>.</p>
+                      </div>
+
+                      <div className="mt-6">
+                        <p className="text-lg font-semibold text-slate-800">Technologies I Work With:</p>
+                        <div className="flex flex-wrap gap-3 mt-2">
+                          <span className="px-4 py-2 text-xs font-medium bg-slate-200 text-slate-700 rounded-full">React</span>
+                          <span className="px-4 py-2 text-xs font-medium bg-slate-200 text-slate-700 rounded-full">Next.js</span>
+                          <span className="px-4 py-2 text-xs font-medium bg-slate-200 text-slate-700 rounded-full">Node.js</span>
+                          <span className="px-4 py-2 text-xs font-medium bg-slate-200 text-slate-700 rounded-full">Tailwind CSS</span>
+                          <span className="px-4 py-2 text-xs font-medium bg-slate-200 text-slate-700 rounded-full">AWS</span>
+                          <span className="px-4 py-2 text-xs font-medium bg-slate-200 text-slate-700 rounded-full">MongoDB</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-6">
+                        <p className="text-lg font-semibold text-slate-800">What Drives Me:</p>
+                        <p className="text-slate-600 leading-relaxed">
+                          I am deeply motivated by the impact that technology can have on people’s lives. Whether it’s optimizing a process, improving user experience, or building something entirely new, I’m driven to create innovative solutions that leave a lasting impact.
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                  {page === "blog" && (
+                    <motion.div
+                      key="blog"
+                      initial={{ opacity: 0, y: -50 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 50 }}
+                      className="space-y-6"
+                    >
+                      <h2 className="text-2xl font-semibold">
+                        Latest <span className="text-green-600">Blog Posts</span>
+                      </h2>
+
+                      <motion.div
+                        variants={timelineVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="relative pl-8 border-l-2 border-slate-300"
+                      >
+                        {blogPosts.map((post, index) => (
+                          <motion.div
+                            key={index}
+                            custom={index}
+                            variants={itemVariants}
+                            initial="hidden"
+                            animate="visible"
+                            className="mb-8 relative"
+                          >
+                            {/* Timeline dot */}
+                            <div className="absolute -left-[33px] w-4 h-4 bg-slate-300 rounded-full">
+                              <div className="absolute inset-1 bg-white rounded-full" />
+                            </div>
+
+                            {/* Content */}
+                            <a
+                              href={post.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block bg-slate-50 rounded-lg p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md"
+                            >
+                              <div className="flex justify-between items-start">
+                                <span className="text-sm font-medium text-slate-500">{post.date}</span>
+                                <span className="text-sm text-slate-400">{post.readTime}</span>
+                              </div>
+                              <h3 className="text-lg font-semibold text-slate-800 mt-1">{post.title}</h3>
+                              <p className="text-slate-600 mt-2">{post.description}</p>
+                              <div className="flex flex-wrap gap-2 mt-3">
+                                {post.tags.map((tag, tagIndex) => (
+                                  <span
+                                    key={tagIndex}
+                                    className="px-2 py-1 text-xs font-medium bg-slate-200 text-slate-700 rounded-full"
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            </a>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+
+                      <div className="text-center mt-8">
+                        <a
+                          href="https://hashnode.com/your-profile"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-4 py-2 bg-slate-200 text-slate-700 rounded-full hover:bg-slate-300 transition-colors font-medium text-sm"
+                        >
+                          View all posts on Hashnode →
+                        </a>
+                      </div>
+                    </motion.div>
+                  )}
+                  {page === "career" && (
+                    <motion.div
+                      key="career"
+                      variants={variants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      className="space-y-6"
+                    >
+                      <h2 className="text-2xl font-semibold">
+                        Career <span className="text-green-600">Journey</span>
+                      </h2>
+
+                      <motion.div
+                        variants={timelineVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="relative pl-8 border-l-2 border-slate-300"
+                      >
+                        {careerHistory.map((item, index) => (
+                          <motion.div
+                            key={index}
+                            custom={index}
+                            variants={itemVariants}
+                            initial="hidden"
+                            animate="visible"
+                            className="mb-8 relative"
+                          >
+                            {/* Timeline dot */}
+                            <div className="absolute -left-[33px] w-4 h-4 bg-slate-300 rounded-full">
+                              <div className="absolute inset-1 bg-white rounded-full" />
+                            </div>
+
+                            {/* Content */}
+                            <div className="bg-slate-50 rounded-lg p-4 shadow-sm">
+                              <span className="text-sm font-medium text-slate-500">{item.period}</span>
+                              <h3 className="text-lg font-semibold text-slate-800 mt-1">{item.role}</h3>
+                              <p className="text-green-600 font-medium">{item.company}</p>
+                              <p className="text-slate-600 mt-2">{item.description}</p>
+                              <div className="flex flex-wrap gap-2 mt-3">
+                                {item.tech.map((tech, techIndex) => (
+                                  <span
+                                    key={techIndex}
+                                    className="px-2 py-1 text-xs font-medium bg-slate-200 text-slate-700 rounded-full"
+                                  >
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Right Section - Image */}
+            <div className="w-full md:w-1/2 flex items-center justify-center mt-8 md:mt-0">
+              <div className="relative w-full max-w-md aspect-square">
+                <Image
+                  src={photo}
+                  alt="Portfolio photo"
+                  className="object-contain"
+                  priority
+                  fill
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <div className="m-4 w-full py-4 flex items-center justify-center">
+        <p className="text-sm text-slate-600">
+          &copy; {new Date().getFullYear()} <span className="font-semibold text-green-600">Yasar Arafath</span>. All rights reserved.
+        </p>
+      </div>
     </div>
   );
 }

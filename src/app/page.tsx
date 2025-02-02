@@ -142,6 +142,67 @@ export default function Home() {
                       </div>
                     </motion.div>
                   )}
+                  {page === "socials" && (
+                    <motion.div
+                      key="socials"
+                      variants={variants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      className="space-y-6"
+                    >
+                      <h2 className="text-2xl font-semibold">
+                        Connect with Me on <span className="text-green-600">Social Media</span>
+                      </h2>
+
+                      <div className="flex flex-wrap gap-6">
+                        <a
+                          href="https://twitter.com/yourusername"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full hover:bg-slate-200 transition-colors font-medium text-lg"
+                        >
+                          <i className="fab fa-twitter mr-2"></i> Twitter
+                        </a>
+
+                        <a
+                          href="https://linkedin.com/in/yourusername"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full hover:bg-slate-200 transition-colors font-medium text-lg"
+                        >
+                          <i className="fab fa-linkedin mr-2"></i> LinkedIn
+                        </a>
+
+                        <a
+                          href="https://instagram.com/yourusername"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full hover:bg-slate-200 transition-colors font-medium text-lg"
+                        >
+                          <i className="fab fa-instagram mr-2"></i> Instagram
+                        </a>
+
+                        <a
+                          href="https://github.com/yourusername"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full hover:bg-slate-200 transition-colors font-medium text-lg"
+                        >
+                          <i className="fab fa-github mr-2"></i> GitHub
+                        </a>
+
+                        <a
+                          href="https://www.behance.net/yourusername"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full hover:bg-slate-200 transition-colors font-medium text-lg"
+                        >
+                          <i className="fab fa-behance mr-2"></i> Behance
+                        </a>
+                      </div>
+                    </motion.div>
+                  )}
                   {page === "blog" && (
                     <motion.div
                       key="blog"
@@ -211,6 +272,38 @@ export default function Home() {
                         >
                           View all posts on Hashnode →
                         </a>
+                      </div>
+                    </motion.div>
+                  )}
+                  {page === "gallery" && (
+                    <motion.div
+                      key="gallery"
+                      variants={variants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      className="space-y-6"
+                    >
+                      <h2 className="text-2xl font-semibold">
+                        My <span className="text-green-600">Gallery</span>
+                      </h2>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {["https://images.pexels.com/photos/28617424/pexels-photo-28617424/free-photo-of-cozy-indoor-scene-with-turkish-tea.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "https://images.pexels.com/photos/30368522/pexels-photo-30368522/free-photo-of-autumn-at-museum-island-berlin-germany.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"].map((item) => (
+                          <motion.div
+                            key={item}
+                            className="relative bg-slate-50 rounded-lg shadow-md overflow-hidden hover:scale-105 transform transition-all"
+                          >
+                            <img
+                              src={`${item}`}
+                              alt={`Gallery Image`}
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                              <p className="text-white text-lg font-semibold">Image {item}</p>
+                            </div>
+                          </motion.div>
+                        ))}
                       </div>
                     </motion.div>
                   )}

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
-  const [page, setPage] = useState("career");
+  const [page, setPage] = useState("about");
 
   const blogPosts = [
     {

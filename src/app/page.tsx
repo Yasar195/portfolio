@@ -137,7 +137,7 @@ export default function Home() {
                       <div className="mt-6">
                         <p className="text-lg font-semibold text-slate-800">What Drives Me:</p>
                         <p className="text-slate-600 leading-relaxed">
-                          I am deeply motivated by the impact that technology can have on people’s lives. Whether it’s optimizing a process, improving user experience, or building something entirely new, I’m driven to create innovative solutions that leave a lasting impact.
+                          I am deeply motivated by the impact that technology can have on peoples lives. Whether its optimizing a process, improving user experience, or building something entirely new, Im driven to create innovative solutions that leave a lasting impact.
                         </p>
                       </div>
                     </motion.div>

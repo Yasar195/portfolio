@@ -158,7 +158,7 @@ export default function Home() {
                       {/* Contact Form */}
                       <div className="bg-slate-50 p-6 rounded-lg shadow-md">
                         <p className="text-lg text-slate-600">
-                          Have a question or want to work together? Drop me a message and I'll get back to you as soon as possible.
+                          Have a question or want to work together? Drop me a message and I get back to you as soon as possible.
                         </p>
                   
                         <form action="https://formspree.io/f/maykbjwb" method="POST" className="mt-6 space-y-4">

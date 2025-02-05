@@ -72,16 +72,16 @@ export default function Home() {
             {/* Left Section - Navigation & Content */}
             <div className="w-full md:w-1/2 flex flex-col h-[calc(100vh-12rem)]">
               {/* Navigation - Fixed */}
-              <nav className="bg-slate-100 rounded-lg p-4 mb-8 sticky top-0 z-10">
+              <nav className="bg-green-100 rounded-full p-4 mb-8 sticky top-0 z-10">
                 <div className="flex flex-wrap md:flex-nowrap justify-center gap-3">
-                  {["about", "blog", "career", "projects", "socials", "gallery"].map((item) => (
+                  {["about", "blog", "career", "projects", "contact", "gallery"].map((item) => (
                     <motion.button
                       key={item}
                       onClick={() => setPage(item)}
                       className={`px-4 py-2 rounded-full font-semibold text-sm transition-colors
                         ${page === item
-                          ? "bg-slate-300 text-slate-700"
-                          : "text-slate-600 hover:bg-slate-200"
+                          ? "bg-green-300 text-slate-700"
+                          : "text-slate-600 hover:bg-green-200"
                         }`}
                       whileTap={{ scale: 0.95, boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}  // Click animation
                       whileHover={{ scale: 1.05 }}  // Hover effect for scaling up
@@ -142,9 +142,9 @@ export default function Home() {
                       </div>
                     </motion.div>
                   )}
-                  {page === "socials" && (
-                    <motion.div
-                      key="socials"
+                  {page === "contact" && (
+                      <motion.div
+                      key="contact"
                       variants={variants}
                       initial="hidden"
                       animate="visible"
@@ -152,54 +152,58 @@ export default function Home() {
                       className="space-y-6"
                     >
                       <h2 className="text-2xl font-semibold">
-                        Connect with Me on <span className="text-green-600">Social Media</span>
+                        Get in Touch <span className="text-green-600">with Me</span>
                       </h2>
-
-                      <div className="flex flex-wrap gap-6">
-                        <a
-                          href="https://twitter.com/yourusername"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full hover:bg-slate-200 transition-colors font-medium text-lg"
-                        >
-                          <i className="fab fa-twitter mr-2"></i> Twitter
-                        </a>
-
-                        <a
-                          href="https://linkedin.com/in/yourusername"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full hover:bg-slate-200 transition-colors font-medium text-lg"
-                        >
-                          <i className="fab fa-linkedin mr-2"></i> LinkedIn
-                        </a>
-
-                        <a
-                          href="https://instagram.com/yourusername"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full hover:bg-slate-200 transition-colors font-medium text-lg"
-                        >
-                          <i className="fab fa-instagram mr-2"></i> Instagram
-                        </a>
-
-                        <a
-                          href="https://github.com/yourusername"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full hover:bg-slate-200 transition-colors font-medium text-lg"
-                        >
-                          <i className="fab fa-github mr-2"></i> GitHub
-                        </a>
-
-                        <a
-                          href="https://www.behance.net/yourusername"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full hover:bg-slate-200 transition-colors font-medium text-lg"
-                        >
-                          <i className="fab fa-behance mr-2"></i> Behance
-                        </a>
+                  
+                      {/* Contact Form */}
+                      <div className="bg-slate-50 p-6 rounded-lg shadow-md">
+                        <p className="text-lg text-slate-600">
+                          Have a question or want to work together? Drop me a message and I'll get back to you as soon as possible.
+                        </p>
+                  
+                        <form action="https://formspree.io/f/maykbjwb" method="POST" className="mt-6 space-y-4">
+                          <div className="flex flex-col">
+                            <label htmlFor="name" className="text-sm font-medium text-slate-700">Your Name</label>
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              className="px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                              placeholder="John Doe"
+                              required
+                            />
+                          </div>
+                  
+                          <div className="flex flex-col">
+                            <label htmlFor="email" className="text-sm font-medium text-slate-700">Your Email</label>
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              className="px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                              placeholder="yourname@example.com"
+                              required
+                            />
+                          </div>
+                  
+                          <div className="flex flex-col">
+                            <label htmlFor="message" className="text-sm font-medium text-slate-700">Your Message</label>
+                            <textarea
+                              id="message"
+                              name="message"
+                              className="px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                              placeholder="Write your message here..."
+                              required
+                            ></textarea>
+                          </div>
+                  
+                          <button
+                            type="submit"
+                            className="w-full py-2 mt-4 bg-green-600 text-white rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors"
+                          >
+                            Send Message
+                          </button>
+                        </form>
                       </div>
                     </motion.div>
                   )}

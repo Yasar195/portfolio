@@ -2,30 +2,55 @@
 
 import Image from "next/image";
 import photo from "../../public/artist-white.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { pages } from "next/dist/build/templates/app-page";
 
 export default function Home() {
   const [page, setPage] = useState("about");
+  const [blogs, setBlogs] = useState([] as any);
 
-  const blogPosts = [
-    {
-      date: "2024 Jan 15",
-      title: "Building Scalable React Applications",
-      description: "Learn how to structure your React applications for scalability and maintainability. We'll cover best practices, state management, and performance optimization techniques.",
-      tags: ["React", "Architecture", "Performance"],
-      readTime: "8 min read",
-      link: "https://hashnode.com/your-blog-1"
-    },
-    {
-      date: "2023 Dec 28",
-      title: "Modern CSS Techniques You Should Know",
-      description: "Discover the latest CSS features and techniques that can revolutionize your web development workflow. From CSS Grid to Custom Properties, we'll explore it all.",
-      tags: ["CSS", "Web Development", "Frontend"],
-      readTime: "6 min read",
-      link: "https://hashnode.com/your-blog-2"
-    }
-  ];
+  useEffect(()=> {
+    getStaticProps();
+  }, [])
+
+  async function getStaticProps() {
+    const query = `
+      query {
+        publication(host: "blogs.yasararafath.in") {
+          id
+          posts(first: 10) {
+            edges {
+              node {
+                title
+                url
+                readTimeInMinutes
+                tags {
+                  name
+                }
+                publishedAt
+                brief
+              }
+            }
+          }
+        }
+      }
+    `;
+  
+    const response = await fetch("https://gql.hashnode.com/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ query }), // Ensure the request is correctly formatted
+    });
+  
+    const data = await response.json();
+    const blogs: any[] = data.data.publication.posts.edges
+  
+    setBlogs([...blogs])
+  }
 
   const variants = {
     hidden: { opacity: 0, y: -50 },
@@ -225,7 +250,16 @@ export default function Home() {
                         animate="visible"
                         className="relative pl-8 border-l-2 border-slate-300"
                       >
-                        {blogPosts.map((post, index) => (
+                        {blogs.map((post: {node: {
+                          tags: Array<{
+                            name: string
+                          }>,
+                          brief: string,
+                          title: string,
+                          url: string,
+                          publishedAt: string,
+                          readTimeInMinutes: string
+                        }}, index:number) => (
                           <motion.div
                             key={index}
                             custom={index}
@@ -241,24 +275,24 @@ export default function Home() {
 
                             {/* Content */}
                             <a
-                              href={post.link}
+                              href={post.node.url}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="block bg-slate-50 rounded-lg p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md"
                             >
                               <div className="flex justify-between items-start">
-                                <span className="text-sm font-medium text-slate-500">{post.date}</span>
-                                <span className="text-sm text-slate-400">{post.readTime}</span>
+                                <span className="text-sm font-medium text-slate-500">{post.node.publishedAt}</span>
+                                <span className="text-sm text-slate-400">{post.node.readTimeInMinutes} Minutes read</span>
                               </div>
-                              <h3 className="text-lg font-semibold text-slate-800 mt-1">{post.title}</h3>
-                              <p className="text-slate-600 mt-2">{post.description}</p>
+                              <h3 className="text-lg font-semibold text-slate-800 mt-1">{post.node.title}</h3>
+                              <p className="text-slate-600 mt-2">{post.node.brief}</p>
                               <div className="flex flex-wrap gap-2 mt-3">
-                                {post.tags.map((tag, tagIndex) => (
+                                {post.node.tags.map((tag: {name: string}, tagIndex: number) => (
                                   <span
                                     key={tagIndex}
                                     className="px-2 py-1 text-xs font-medium bg-slate-200 text-slate-700 rounded-full"
                                   >
-                                    {tag}
+                                    {tag.name}
                                   </span>
                                 ))}
                               </div>
@@ -269,7 +303,7 @@ export default function Home() {
 
                       <div className="text-center mt-8">
                         <a
-                          href="https://hashnode.com/your-profile"
+                          href="https://blogs.yasararafath.in/"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center px-4 py-2 bg-slate-200 text-slate-700 rounded-full hover:bg-slate-300 transition-colors font-medium text-sm"

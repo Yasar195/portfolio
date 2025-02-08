@@ -4,11 +4,34 @@ import Image from "next/image";
 import photo from "../../public/artist-white.jpg";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { pages } from "next/dist/build/templates/app-page";
+
+interface BlogTag {
+  name: string;
+}
+
+interface BlogPost {
+  node: {
+    title: string;
+    url: string;
+    readTimeInMinutes: string;
+    tags: BlogTag[];
+    publishedAt: string;
+    brief: string;
+  };
+}
+
+interface CareerHistoryItem {
+  period: string;
+  role: string;
+  company: string;
+  description: string;
+  tech: string[];
+}
+
 
 export default function Home() {
   const [page, setPage] = useState("about");
-  const [blogs, setBlogs] = useState([] as any);
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
 
   useEffect(()=> {
     getStaticProps();
@@ -47,7 +70,7 @@ export default function Home() {
     });
   
     const data = await response.json();
-    const blogs: any[] = data.data.publication.posts.edges
+    const blogs: BlogPost[] = data.data.publication.posts.edges
   
     setBlogs([...blogs])
   }
@@ -72,7 +95,7 @@ export default function Home() {
     }),
   };
 
-  const careerHistory = [
+  const careerHistory: CareerHistoryItem[] = [
     {
       period: "2023 jan - Present",
       role: "Software Engineer",
@@ -327,18 +350,25 @@ export default function Home() {
                       </h2>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {["https://images.pexels.com/photos/28617424/pexels-photo-28617424/free-photo-of-cozy-indoor-scene-with-turkish-tea.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "https://images.pexels.com/photos/30368522/pexels-photo-30368522/free-photo-of-autumn-at-museum-island-berlin-germany.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"].map((item) => (
+                        {[
+                          "https://images.pexels.com/photos/28617424/pexels-photo-28617424/free-photo-of-cozy-indoor-scene-with-turkish-tea.jpeg",
+                          "https://images.pexels.com/photos/30368522/pexels-photo-30368522/free-photo-of-autumn-at-museum-island-berlin-germany.jpeg"
+                        ].map((item, index) => (
                           <motion.div
                             key={item}
                             className="relative bg-slate-50 rounded-lg shadow-md overflow-hidden hover:scale-105 transform transition-all"
                           >
-                            <img
-                              src={`${item}`}
-                              alt={`Gallery Image`}
-                              className="w-full h-full object-cover"
-                            />
+                            <div className="relative w-full h-48">
+                              <Image
+                                src={item}
+                                alt={`Gallery Image ${index + 1}`}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              />
+                            </div>
                             <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                              <p className="text-white text-lg font-semibold">Image {item}</p>
+                              <p className="text-white text-lg font-semibold">Image {index + 1}</p>
                             </div>
                           </motion.div>
                         ))}

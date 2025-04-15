@@ -9,6 +9,7 @@ import AboutScreen from "../../component/About";
 import CareerScreen from "../../component/Career";
 import ContactScreen from "../../component/Contact";
 import GalleryScreen from "../../component/Gallery";
+import ChatWidget from "../../component/Chat";
 
 interface BlogTag {
   name: string;
@@ -118,7 +119,7 @@ export default function Home() {
   // ];
 
   return (
-    <div className="h-screen bg-slate-100 p-4 sm:p-6 md:p-8">
+    <div className="relative h-screen bg-slate-100 p-4 sm:p-6 md:p-8">
       <main className="mx-auto max-w-8xl">
         <div className="bg-white rounded-lg shadow-2xl p-6 md:p-8">
           <div className="flex flex-col md:flex-row md:gap-8 h-full">
@@ -463,6 +464,9 @@ export default function Home() {
         <p className="text-sm text-slate-600">
           &copy; {new Date().getFullYear()} <span className="font-semibold text-green-600">Yasar Arafath</span>. All rights reserved.
         </p>
+      </div>
+      <div className="absolute right-10 bottom-10 w-1/4">
+        <ChatWidget/>
       </div>
     </div>
   );

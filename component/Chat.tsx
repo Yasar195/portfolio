@@ -1,14 +1,16 @@
 import { useState, useRef, useEffect } from "react";
-import { Send } from "lucide-react";
+import { Send, MessageSquareDot } from "lucide-react";
 import axios from "axios";
 
 
 const ChatWidget = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { text: "Hello! How can I help you today?", isUser: false },
   ]);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const chatRef = useRef<HTMLDivElement | null>(null);
 
   const sendMessage = () => {
     if (!input.trim()) return;
@@ -34,11 +36,38 @@ const ChatWidget = () => {
   };
 
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (chatRef.current && !chatRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, messages]);
+
+
+   if (!isOpen) {
+    return (
+      <button
+        onClick={() => setIsOpen(true)}
+        className="p-4 bg-[#4A90E2] hover:bg-[#357ABD] rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
+        aria-label="Open chat"
+      >
+        <MessageSquareDot size={24} className="text-white" />
+      </button>
+    );
+  }
 
   return (
-    <div className="w-full max-w-md h-[500px] flex flex-col bg-white shadow p-4 rounded-lg">
+    <div ref={chatRef} className="w-full max-w-md h-[500px] flex flex-col bg-white shadow p-4 rounded-lg">
       {/* Header */}
       <div className="bg-black text-white p-4 text-lg font-semibold rounded-t-xl">
         Yasar Arafath

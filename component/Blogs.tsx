@@ -43,7 +43,7 @@ const BlogScreen = ({ blogs }: BlogScreenProps) => {
       className="space-y-6"
     >
       <h2 className="text-2xl font-semibold">
-        Latest <span className="text-green-600">Blog Posts</span>
+        Latest <span className="text-blue-600">Blog Posts</span>
       </h2>
 
       <motion.div

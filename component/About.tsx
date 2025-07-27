@@ -18,15 +18,15 @@ const AboutScreen = () => {
     >
       <p className="text-xl font-semibold text-slate-800">
         Hey there, I am{" "}
-        <span className="text-green-600 font-bold">Yasar Arafath</span> 👋
+        <span className="text-blue-600 font-bold">Yasar Arafath</span> 👋
       </p>
 
       <p className="text-slate-600 leading-relaxed">
-        Welcome to my portfolio! I'm a passionate software engineer with a drive for solving real-world problems through elegant code. I specialize in full-stack web development, and I love creating seamless user experiences that are both functional and beautiful.
+        Hi, I'm Yasar Arafath — thank you for visiting my portfolio. I'm a Software Engineer specializing in Backend Development and DevOps.
       </p>
 
       <p className="text-slate-600 leading-relaxed">
-        With over <span className="text-green-600 font-semibold">1 year of experience</span> working with cutting-edge technologies like <span className="text-blue-600">React</span>, <span className="text-blue-600">Next.js</span>, and <span className="text-yellow-600">Node.js</span>, I have honed my skills in building scalable, efficient, and user-friendly web applications.
+        With over <span className="text-blue-600 font-semibold">2 year of experience</span> working with cutting-edge technologies like <span className="text-blue-600">React</span>, <span className="text-blue-600">Next.js</span>, and <span className="text-yellow-600">Node.js</span>, I have honed my skills in building scalable, efficient, and user-friendly web applications.
       </p>
 
       <div className="flex items-center space-x-3">
@@ -46,12 +46,12 @@ const AboutScreen = () => {
         </div>
       </div>
 
-      <div className="mt-6">
+      {/* <div className="mt-6">
         <p className="text-lg font-semibold text-slate-800">What Drives Me:</p>
         <p className="text-slate-600 leading-relaxed">
           I am deeply motivated by the impact that technology can have on peoples lives. Whether its optimizing a process, improving user experience, or building something entirely new, Im driven to create innovative solutions that leave a lasting impact.
         </p>
-      </div>
+      </div> */}
     </motion.div>
   );
 };

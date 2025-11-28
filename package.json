@@ -1,30 +1,23 @@
 {
-  "name": "portfolio",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "axios": "^1.8.4",
-    "framer-motion": "^12.0.6",
-    "lucide-react": "^0.488.0",
-    "next": "15.1.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.6",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
-  }
+	"name": "portfolio",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^7.0.0",
+		"@sveltejs/kit": "^2.48.5",
+		"@sveltejs/vite-plugin-svelte": "^6.2.1",
+		"svelte": "^5.43.8",
+		"svelte-check": "^4.3.4",
+		"typescript": "^5.9.3",
+		"vite": "^7.2.2"
+	}
 }

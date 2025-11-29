@@ -28,26 +28,20 @@
     {
       name: 'GitHub',
       icon: 'github',
-      url: 'https://github.com',
+      url: 'https://github.com/Yasar195',
       color: '#fff'
     },
     {
       name: 'LinkedIn',
       icon: 'linkedin',
-      url: 'https://linkedin.com',
+      url: 'https://www.linkedin.com/in/yasararafathdev/',
       color: '#0077b5'
     },
     {
       name: 'Twitter',
       icon: 'twitter',
-      url: 'https://twitter.com',
+      url: 'https://x.com/Yasararafathdev',
       color: '#1da1f2'
-    },
-    {
-      name: 'Email',
-      icon: 'mail',
-      url: 'mailto:yasar@example.com',
-      color: '#ea4335'
     }
   ];
 </script>

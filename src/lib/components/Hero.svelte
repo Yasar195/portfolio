@@ -26,7 +26,7 @@
     <div class="hero-text" class:visible>
       <p class="greeting">Hi, I'm</p>
       <h1 class="name">
-        <span class="gradient-text">Yasar</span>
+        <span class="gradient-text">Yasar Arafath</span>
       </h1>
       <div class="role-container">
         <h2 class="role">
@@ -166,11 +166,11 @@
   
   .floating-card {
     position: absolute;
-    background: rgba(26, 26, 36, 0.7);
+    background: var(--glass-bg);
     backdrop-filter: blur(10px);
     padding: var(--spacing-lg);
     border-radius: var(--radius-xl);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
@@ -209,7 +209,7 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.4;
+    opacity: 0.3;
     animation: gradient-shift 8s ease infinite;
   }
   

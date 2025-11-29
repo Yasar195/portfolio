@@ -14,7 +14,7 @@
   <div class="container">
     <div class="footer-content">
       <div class="footer-brand">
-        <h3 class="gradient-text">Yasar</h3>
+        <h3 class="gradient-text">Yasar Arafath</h3>
         <p>Building digital experiences that make a difference.</p>
       </div>
       
@@ -54,7 +54,7 @@
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; {currentYear} Yasar. All rights reserved.</p>
+      <p>&copy; {currentYear} Yasar Arafath. All rights reserved.</p>
       <p>Made with ❤️ using Svelte</p>
     </div>
   </div>

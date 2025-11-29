@@ -9,13 +9,13 @@
 </script>
 
 <svelte:head>
-  <title>Yasar - Backend Developer & DevOps Engineer</title>
-  <meta name="description" content="Portfolio of Yasar - Backend Developer specializing in scalable systems, database architecture, and DevOps automation with Node.js, Python, Docker, and Kubernetes." />
+  <title>Yasar Arafath - Backend Developer & DevOps Engineer</title>
+  <meta name="description" content="Portfolio of Yasar Arafath - Backend Developer specializing in scalable systems, database architecture, and DevOps automation with Node.js, Python, Docker, and Kubernetes." />
   <meta name="keywords" content="Backend Developer, DevOps Engineer, Database Architect, Node.js, Python, Docker, Kubernetes, AWS, PostgreSQL" />
-  <meta name="author" content="Yasar" />
+  <meta name="author" content="Yasar Arafath" />
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Yasar - Backend Developer & DevOps Engineer" />
+  <meta property="og:title" content="Yasar Arafath - Backend Developer & DevOps Engineer" />
   <meta property="og:description" content="Building scalable backend systems and automating infrastructure" />
   <meta property="og:type" content="website" />
   

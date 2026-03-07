@@ -47,6 +47,7 @@
     { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
+    { href: 'https://projects.yasararafath.in', label: 'Projects' },
     { href: '#blog', label: 'Blog' },
     { href: '#contact', label: 'Contact' }
   ];

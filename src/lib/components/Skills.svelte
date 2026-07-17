@@ -1,11 +1,32 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  
   interface Skill {
     name: string;
     logo: string;
   }
   
-  // All skills in a single flat array - no categories
-  const skills: Skill[] = [
+  let sectionEl: HTMLElement;
+  let visible = $state(false);
+  
+  onMount(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            visible = true;
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    
+    observer.observe(sectionEl);
+    return () => observer.disconnect();
+  });
+  
+  const skillsRow1: Skill[] = [
     { name: 'Node.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
     { name: 'Python', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
     { name: 'PostgreSQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
@@ -20,6 +41,9 @@
     { name: 'Linux', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
     { name: 'Git', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
     { name: 'FastAPI', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg' },
+  ];
+  
+  const skillsRow2: Skill[] = [
     { name: 'Express', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
     { name: 'GraphQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg' },
     { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
@@ -32,197 +56,189 @@
     { name: 'Go', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg' },
     { name: 'GCP', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg' },
     { name: 'Azure', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg' },
-    { name: 'Vault', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vault/vault-original.svg' }
+    { name: 'Vault', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vault/vault-original.svg' },
   ];
 </script>
 
-<section id="skills" class="section">
+<section id="skills" class="section" bind:this={sectionEl}>
   <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">
-        My <span class="gradient-text">Skills</span>
-      </h2>
-      <p class="section-subtitle">
-        Technologies and tools I work with to bring ideas to life
-      </p>
+    <div class="skills-header" class:visible>
+      <div class="section-divider"></div>
+      <h2>My <span class="gradient-text">Skills</span></h2>
+      <p class="skills-subtitle">Technologies and tools I work with</p>
     </div>
     
-    <div class="skills-scroll-container">
-      <div class="skills-track">
-        {#each [...skills, ...skills] as skill}
-          <div class="skill-bubble">
-            <img src={skill.logo} alt={skill.name} class="skill-logo" />
-            <span class="skill-name">{skill.name}</span>
-          </div>
-        {/each}
+    <div class="marquee-wrapper" class:visible>
+      <!-- Row 1: Scrolls left -->
+      <div class="marquee-container">
+        <div class="marquee-track track-left">
+          {#each [...skillsRow1, ...skillsRow1] as skill}
+            <div class="skill-chip">
+              <img src={skill.logo} alt={skill.name} class="skill-logo" loading="lazy" />
+              <span class="skill-name">{skill.name}</span>
+            </div>
+          {/each}
+        </div>
+      </div>
+      
+      <!-- Row 2: Scrolls right -->
+      <div class="marquee-container">
+        <div class="marquee-track track-right">
+          {#each [...skillsRow2, ...skillsRow2] as skill}
+            <div class="skill-chip">
+              <img src={skill.logo} alt={skill.name} class="skill-logo" loading="lazy" />
+              <span class="skill-name">{skill.name}</span>
+            </div>
+          {/each}
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .section-header {
+  .skills-header {
     text-align: center;
-    margin-bottom: var(--spacing-4xl);
+    margin-bottom: var(--spacing-3xl);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s var(--ease-out);
   }
   
-  .section-title {
+  .skills-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .skills-header .section-divider {
+    margin: 0 auto var(--spacing-xl);
+  }
+  
+  .skills-header h2 {
     font-size: var(--font-size-5xl);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
   }
   
-  .section-subtitle {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
+  .skills-subtitle {
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+    margin: 0;
   }
   
-  .skills-scroll-container {
+  .marquee-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all 0.7s var(--ease-out) 0.15s;
+  }
+  
+  .marquee-wrapper.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .marquee-container {
     overflow: hidden;
     position: relative;
-    padding: var(--spacing-2xl) 0;
+    padding: var(--spacing-sm) 0;
     mask-image: linear-gradient(
       to right,
       transparent,
-      black 10%,
-      black 90%,
+      black 8%,
+      black 92%,
       transparent
     );
     -webkit-mask-image: linear-gradient(
       to right,
       transparent,
-      black 10%,
-      black 90%,
+      black 8%,
+      black 92%,
       transparent
     );
   }
   
-  .skills-track {
+  .marquee-track {
     display: flex;
-    gap: var(--spacing-xl);
-    animation: scroll-left 40s linear infinite;
+    gap: var(--spacing-md);
     width: fit-content;
   }
   
-  .skills-track:hover {
+  .track-left {
+    animation: scroll-left 45s linear infinite;
+  }
+  
+  .track-right {
+    animation: scroll-right 40s linear infinite;
+  }
+  
+  .marquee-track:hover {
     animation-play-state: paused;
   }
   
   @keyframes scroll-left {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
   
-  .skill-bubble {
+  @keyframes scroll-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  
+  .skill-chip {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: var(--spacing-sm);
-    min-width: 140px;
-    padding: var(--spacing-lg);
+    padding: 0.6rem 1.2rem;
     background: var(--color-bg-secondary);
-    border: 2px solid rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-xl);
-    transition: all var(--duration-base);
-    cursor: pointer;
-    position: relative;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    white-space: nowrap;
+    transition: all var(--duration-base) var(--ease-out);
+    cursor: default;
   }
   
-  .skill-bubble::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: var(--radius-xl);
-    background: var(--gradient-primary);
-    opacity: 0;
-    transition: opacity var(--duration-base);
-    z-index: -1;
-  }
-  
-  .skill-bubble:hover {
-    transform: translateY(-12px) scale(1.15);
-    border-color: transparent;
-    box-shadow: 
-      0 20px 40px rgba(99, 102, 241, 0.4),
-      0 0 80px rgba(139, 92, 246, 0.3);
-    z-index: 10;
-  }
-  
-  .skill-bubble:hover::before {
-    opacity: 1;
-  }
-  
-  .skill-bubble:hover::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius-xl);
-    background: var(--gradient-glass);
-    animation: bubble-pop 0.6s ease-out;
-  }
-  
-  @keyframes bubble-pop {
-    0% {
-      transform: scale(1);
-      opacity: 0;
-    }
-    50% {
-      transform: scale(1.3);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1.6);
-      opacity: 0;
-    }
+  .skill-chip:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+    background: var(--color-bg-tertiary);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.12);
   }
   
   .skill-logo {
-    width: 56px;
-    height: 56px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
-    transition: all var(--duration-base);
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    transition: transform var(--duration-base) var(--ease-out);
   }
   
-  .skill-bubble:hover .skill-logo {
-    transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 8px 16px rgba(99, 102, 241, 0.5));
+  .skill-chip:hover .skill-logo {
+    transform: scale(1.1);
   }
   
   .skill-name {
     font-size: var(--font-size-sm);
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-text-primary);
-    text-align: center;
-    transition: all var(--duration-base);
-  }
-  
-  .skill-bubble:hover .skill-name {
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: var(--font-size-base);
   }
   
   @media (max-width: 768px) {
-    .skill-bubble {
-      min-width: 120px;
-      padding: var(--spacing-md);
+    .skill-chip {
+      padding: 0.5rem 1rem;
     }
     
     .skill-logo {
-      width: 48px;
-      height: 48px;
+      width: 24px;
+      height: 24px;
     }
     
-    .skills-track {
+    .track-left {
+      animation-duration: 35s;
+    }
+    
+    .track-right {
       animation-duration: 30s;
     }
   }

@@ -1,11 +1,9 @@
 <script lang="ts">
-  import Navigation from '$lib/components/Navigation.svelte';
   import Hero from '$lib/components/Hero.svelte';
   import About from '$lib/components/About.svelte';
   import Skills from '$lib/components/Skills.svelte';
-  import Blog from '$lib/components/Blog.svelte';
+  import Writings from '$lib/components/Writings.svelte';
   import Contact from '$lib/components/Contact.svelte';
-  import Footer from '$lib/components/Footer.svelte';
 </script>
 
 <svelte:head>
@@ -23,26 +21,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </svelte:head>
 
-<div class="app">
-  <Navigation />
-  <main>
-    <Hero />
-    <About />
-    <Skills />
-    <Blog />
-    <Contact />
-  </main>
-  <Footer />
-</div>
-
-<style>
-  .app {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  main {
-    flex: 1;
-  }
-</style>
+<Hero />
+<About />
+<Skills />
+<Writings />
+<Contact />

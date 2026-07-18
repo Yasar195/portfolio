@@ -38,12 +38,12 @@
   };
   
   const navLinks = [
-    { href: '#home', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
+    { href: '/#home', label: 'Home' },
+    { href: '/#about', label: 'About' },
+    { href: '/#skills', label: 'Skills' },
     { href: 'https://projects.yasararafath.in', label: 'Projects' },
-    { href: '#blog', label: 'Blog' },
-    { href: '#contact', label: 'Contact' }
+    { href: '/#writings', label: 'Writings' },
+    { href: '/#contact', label: 'Contact' }
   ];
 </script>
 

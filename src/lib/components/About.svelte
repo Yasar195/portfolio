@@ -63,9 +63,14 @@
 <style>
   .about-header {
     margin-bottom: var(--spacing-3xl);
+    text-align: center;
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.6s var(--ease-out);
+  }
+
+  .about-header .section-divider {
+    margin: 0 auto;
   }
   
   .about-header.visible {
@@ -90,8 +95,9 @@
   }
   
   .about-text {
-    max-width: 680px;
-    margin-bottom: var(--spacing-3xl);
+    max-width: 720px;
+    margin: 0 auto var(--spacing-3xl);
+    text-align: center;
   }
   
   .about-text .lead {
@@ -121,11 +127,13 @@
     text-transform: uppercase;
     color: var(--color-text-muted);
     margin-bottom: var(--spacing-lg);
+    text-align: center;
   }
   
   .tech-tags {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: var(--spacing-sm);
   }
   

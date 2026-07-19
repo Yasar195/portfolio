@@ -8,6 +8,7 @@ node_modules
 /.svelte-kit
 /build
 context.md
+AGENTS.md
 
 # OS
 .DS_Store

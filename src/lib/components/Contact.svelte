@@ -6,6 +6,7 @@
   let formData = $state({ name: '', email: '', message: '' });
   let loading = $state(false);
   let success = $state(false);
+  let error = $state('');
   
   onMount(() => {
     const observer = new IntersectionObserver(
@@ -19,12 +20,23 @@
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
     loading = true;
-    setTimeout(() => {
-      loading = false;
+    error = '';
+    try {
+      const res = await fetch('https://z4q9mzp937.execute-api.ap-south-1.amazonaws.com/default/emailer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to send');
       success = true;
       formData = { name: '', email: '', message: '' };
       setTimeout(() => { success = false; }, 3000);
-    }, 1500);
+    } catch (err) {
+      error = err instanceof Error ? err.message : 'Something went wrong';
+    } finally {
+      loading = false;
+    }
   };
   
   const socials = [
@@ -38,15 +50,16 @@
   <div class="container">
     <div class="contact-header" class:visible>
       <div class="section-divider"></div>
-      <h2>Get In <span class="gradient-text">Touch</span></h2>
-      <p class="contact-subtitle">Have a project in mind? Let's work together.</p>
+      <h2>Let's <span class="gradient-text">Connect</span></h2>
+      <p class="contact-subtitle">Have a challenging backend problem or infrastructure puzzle? Let's talk.</p>
     </div>
     
     <div class="contact-grid" class:visible>
       <div class="contact-info">
         <p class="info-text">
-          I'm always open to discussing new projects, creative ideas, or 
-          opportunities to be part of your vision.
+          Whether you need a system design review, a production incident post-mortem, 
+          or someone to own the backend architecture — I'm available for freelance, 
+          contract, and full-time roles.
         </p>
         <div class="social-row">
           {#each socials as social}
@@ -68,11 +81,11 @@
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" bind:value={formData.name} required placeholder="Your name" />
+            <input type="text" id="name" bind:value={formData.name} required placeholder="Yasar" />
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" bind:value={formData.email} required placeholder="you@example.com" />
+            <input type="email" id="email" bind:value={formData.email} required placeholder="yasar@example.com" />
           </div>
         </div>
         <div class="form-group">
@@ -80,10 +93,13 @@
           <textarea id="message" rows="5" bind:value={formData.message} required placeholder="Tell me about your project..."></textarea>
         </div>
         <button type="submit" class="btn btn-primary submit-btn" disabled={loading}>
-          {#if loading}Sending...{:else if success}Sent ✓{:else}Send Message{/if}
+          {#if loading}Sending...{:else if success}Delivered &check;{:else}Send Message{/if}
         </button>
         {#if success}
-          <p class="success-msg">Thanks for reaching out! I'll get back to you soon.</p>
+          <p class="success-msg">Message received. I'll respond within 24 hours.</p>
+        {/if}
+        {#if error}
+          <p class="error-msg">{error}</p>
         {/if}
       </form>
     </div>
@@ -117,6 +133,7 @@
   .submit-btn { width: 100%; }
   button[disabled] { opacity: 0.7; cursor: not-allowed; }
   .success-msg { color: var(--color-accent-4); font-weight: 500; text-align: center; font-size: var(--font-size-sm); animation: fadeInUp 0.4s var(--ease-out); margin: 0; }
+  .error-msg { color: #ef4444; font-weight: 500; text-align: center; font-size: var(--font-size-sm); animation: fadeInUp 0.4s var(--ease-out); margin: 0; }
   
   @media (max-width: 968px) { .contact-grid { grid-template-columns: 1fr; } }
   @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }

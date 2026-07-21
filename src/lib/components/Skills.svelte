@@ -65,7 +65,7 @@
     <div class="skills-header" class:visible>
       <div class="section-divider"></div>
       <h2>My <span class="gradient-text">Skills</span></h2>
-      <p class="skills-subtitle">Technologies and tools I work with</p>
+      <p class="skills-subtitle">The stack I reach for when building production systems</p>
     </div>
     
     <div class="marquee-wrapper" class:visible>

@@ -10,7 +10,7 @@
     });
   });
   
-  const roles = ['Backend Developer', 'DevOps Engineer', 'Database Architect', 'SRE'];
+  const roles = ['Backend Engineer', 'DevOps Architect', 'Platform Engineer', 'SRE'];
   let currentRole = $state(0);
   
   onMount(() => {
@@ -30,7 +30,7 @@
   
   <div class="container hero-content">
     <div class="hero-top" class:visible>
-      <p class="hero-label">DevOps Engineer · Backend Engineer · SRE</p>
+      <p class="hero-label">Backend &bull; DevOps &bull; Platform Engineering</p>
     </div>
 
     <div class="hero-main" class:visible>
@@ -48,9 +48,8 @@
           {/key}
         </div>
         <p class="hero-bio">
-          I build scalable backend systems, design robust database architectures, 
-          and automate infrastructure with modern DevOps practices to power 
-          mission-critical applications.
+          Architecting high-performance backend systems, designing resilient database 
+          schemas, and building infrastructure that scales — from zero to millions of users.
         </p>
         <div class="hero-cta">
           <a href="https://projects.yasararafath.in" class="btn btn-primary">

@@ -32,19 +32,19 @@
     <div class="about-body" class:visible>
       <div class="about-text">
         <p class="lead">
-          I'm a backend-focused developer who thrives on building robust, scalable systems. 
-          My expertise lies in designing efficient database architectures and automating 
-          infrastructure with modern DevOps practices.
+          Backend engineer by trade, DevOps advocate by conviction. I design systems 
+          that don't just work — they scale, recover, and evolve without breaking.
         </p>
         <p>
-          I specialize in creating high-performance APIs, optimizing database queries, and 
-          implementing CI/CD pipelines that streamline development workflows. From microservices 
-          to monoliths, containerization to cloud deployments — I handle the server-side 
-          architecture that powers applications.
+          I specialize in high-performance APIs, query-optimized databases, and 
+          CI/CD pipelines that turn deployment anxiety into a non-event. From 
+          microservices to monoliths, container orchestration to cloud-native 
+          architectures — I build the server-side foundation that products run on.
         </p>
         <p>
-          While I can work with frontend technologies when needed, my true passion is the 
-          backend — where data flows, logic executes, and infrastructure scales to meet demand.
+          My passion is the backend layer: where data moves, logic lives, and 
+          infrastructure either keeps up or gets redesigned. No frontend 
+          flourishes — just clean architecture, observability, and uptime.
         </p>
       </div>
       

@@ -36,7 +36,7 @@
     <div class="writings-header" class:visible>
       <div class="section-divider"></div>
       <h2>Latest <span class="gradient-text">Writings</span></h2>
-      <p class="writings-subtitle">Sharing knowledge about backend development, database architecture, and DevOps</p>
+      <p class="writings-subtitle">Deep dives into backend architecture, database internals, and production DevOps</p>
     </div>
     
     {#if latestPosts.length > 0}

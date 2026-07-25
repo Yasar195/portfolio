@@ -23,6 +23,6 @@
 
 <Hero />
 <About />
-<Skills />
 <Writings />
+<Skills />
 <Contact />

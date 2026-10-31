@@ -1,14 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { posts } from '$lib/data/posts';
+  import type { BlogPost } from '$lib/types/blog';
+
+  let { posts }: { posts: BlogPost[] } = $props();
   
   let sectionEl: HTMLElement;
   let visible = $state(false);
   
   // Sort posts by date descending and get the first 3
-  const latestPosts = [...posts]
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-    .slice(0, 3);
+  const latestPosts = posts;
   
   onMount(() => {
     const observer = new IntersectionObserver(
@@ -43,6 +43,9 @@
       <div class="writings-grid" class:visible>
         {#each latestPosts as post, i}
           <a href="/writings/{post.slug}" class="writing-card" style="transition-delay: {0.1 + i * 0.08}s">
+            {#if post.coverImage}
+              <img class="writing-image" src={post.coverImage} alt="" loading="lazy" />
+            {/if}
             <div class="writing-content">
               <div class="writing-meta">
                 <time>{formatDate(post.publishedAt)}</time>
@@ -116,6 +119,7 @@
   }
   
   .writing-content { padding: var(--spacing-xl); flex: 1; display: flex; flex-direction: column; }
+  .writing-image { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
   .writing-meta { display: flex; align-items: center; gap: var(--spacing-sm); font-size: var(--font-size-xs); color: var(--color-text-muted); margin-bottom: var(--spacing-md); font-weight: 500; }
   .meta-dot { opacity: 0.4; }
   .writing-title { font-family: var(--font-display); font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--spacing-sm); color: var(--color-text-primary); line-height: 1.3; }

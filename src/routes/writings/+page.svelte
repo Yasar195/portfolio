@@ -108,6 +108,9 @@
         {#each filteredPosts as post}
           <a href="/writings/{post.slug}" class="writing-card">
             <div class="card-inner">
+              {#if post.coverImage}
+                <img class="writing-image" src={post.coverImage} alt="" loading="lazy" />
+              {/if}
               <div class="writing-meta">
                 <time>{formatDate(post.publishedAt)}</time>
                 <span class="meta-dot">·</span>
@@ -329,6 +332,13 @@
     transition: all var(--duration-base) var(--ease-out);
     position: relative;
     overflow: hidden;
+  }
+
+  .writing-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
   
   .writing-card:hover {

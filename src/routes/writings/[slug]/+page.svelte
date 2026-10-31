@@ -60,6 +60,10 @@
       </div>
       
       <h1 class="article-title">{data.post.title}</h1>
+
+      {#if data.post.coverImage}
+        <img class="article-cover" src={data.post.coverImage} alt="" fetchpriority="high" />
+      {/if}
       
       <p class="article-brief">{data.post.brief}</p>
       
@@ -143,6 +147,16 @@
     margin-bottom: var(--spacing-md);
     color: var(--color-text-primary);
     letter-spacing: -0.01em;
+  }
+
+  .article-cover {
+    display: block;
+    width: 100%;
+    max-height: 460px;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    margin: var(--spacing-xl) 0;
+    border: 1px solid var(--card-border);
   }
   
   .article-brief {
@@ -247,6 +261,22 @@
     background: #1b1b1a !important; /* Ensure it matches bg-secondary */
     padding: var(--spacing-lg) !important;
     overflow-x: auto;
+  }
+
+  :global(.prose img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: var(--spacing-xl) auto;
+    border-radius: var(--radius-lg);
+  }
+
+  :global(.prose figure) { margin: var(--spacing-xl) 0; }
+  :global(.prose figcaption) {
+    margin-top: var(--spacing-sm);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    text-align: center;
   }
   
   :global(.prose pre code) {

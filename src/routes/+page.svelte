@@ -4,6 +4,9 @@
   import Skills from '$lib/components/Skills.svelte';
   import Writings from '$lib/components/Writings.svelte';
   import Contact from '$lib/components/Contact.svelte';
+  import type { PageData } from './$types';
+
+  let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head>
@@ -23,6 +26,6 @@
 
 <Hero />
 <About />
-<Writings />
+<Writings posts={data.latestPosts} />
 <Skills />
 <Contact />

@@ -3,10 +3,11 @@
   import About from '$lib/components/About.svelte';
   import Skills from '$lib/components/Skills.svelte';
   import Writings from '$lib/components/Writings.svelte';
+  import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
   import Contact from '$lib/components/Contact.svelte';
-  import type { PageData } from './$types';
+  import type { ActionData, PageData } from './$types';
 
-  let { data }: { data: PageData } = $props();
+  let { data, form }: { data: PageData; form: ActionData } = $props();
 </script>
 
 <svelte:head>
@@ -27,5 +28,6 @@
 <Hero />
 <About />
 <Writings posts={data.latestPosts} />
+<NewsletterSignup form={form} />
 <Skills />
 <Contact />

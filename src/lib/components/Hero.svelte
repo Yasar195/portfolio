@@ -22,12 +22,6 @@
 </script>
 
 <section id="home" class="hero">
-  <!-- Ambient background -->
-  <div class="hero-ambient">
-    <div class="gradient-orb orb-1"></div>
-    <div class="gradient-orb orb-2"></div>
-  </div>
-  
   <div class="container hero-content">
     <div class="hero-top" class:visible>
       <p class="hero-label">Backend &bull; DevOps &bull; Platform Engineering</p>
@@ -102,40 +96,6 @@
     position: relative;
     padding: var(--spacing-5xl) 0 var(--spacing-4xl);
     overflow: hidden;
-  }
-  
-  /* Ambient gradient background */
-  .hero-ambient {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    z-index: 0;
-    pointer-events: none;
-  }
-  
-  .gradient-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.15;
-  }
-  
-  .orb-1 {
-    width: 500px;
-    height: 500px;
-    background: var(--color-accent-1);
-    top: -10%;
-    right: -5%;
-    animation: pulse-glow 8s ease-in-out infinite;
-  }
-  
-  .orb-2 {
-    width: 400px;
-    height: 400px;
-    background: var(--color-accent-3);
-    bottom: -15%;
-    left: -10%;
-    animation: pulse-glow 8s ease-in-out infinite 4s;
   }
   
   .hero-content {

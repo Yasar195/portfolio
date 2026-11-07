@@ -246,10 +246,21 @@ a:hover {
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: all var(--duration-base) var(--ease-out);
+  transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out), background-color 160ms var(--ease-out), color 160ms var(--ease-out), border-color 160ms var(--ease-out);
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 80ms;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent-1);
+  outline-offset: 3px;
 }
 
 .btn-primary {
@@ -264,6 +275,10 @@ a:hover {
   color: white;
 }
 
+.btn-primary:active:not(:disabled) {
+  box-shadow: var(--shadow-sm);
+}
+
 .btn-secondary {
   background: transparent;
   color: var(--color-text-primary);
@@ -274,6 +289,12 @@ a:hover {
   border-color: var(--color-accent-1);
   color: var(--color-accent-1);
   transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
 }
 
 /* Card Base */

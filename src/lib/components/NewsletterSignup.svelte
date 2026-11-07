@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 
-	let { form }: { form: { success?: boolean; error?: string } | null } = $props();
+	let { form }: { form: { success?: boolean; email?: string; error?: string } | null } = $props();
+	let submitting = $state(false);
+	let email = $state('');
 </script>
 
 <section class="newsletter-section" aria-labelledby="newsletter-title">
@@ -27,27 +29,50 @@
 							</svg>
 						</div>
 						<h3>One last step</h3>
-						<p>Check your inbox for a confirmation link. You’ll be subscribed once you confirm your email.</p>
+						<p>
+							We sent a confirmation link to
+							<strong class="submitted-email">{form.email ?? 'your email address'}</strong>.
+							You’ll be subscribed once you confirm.
+						</p>
 						<span class="spam-note">Can’t find it? Check spam or promotions.</span>
 					</div>
-				{:else}
-					<p class="panel-label">Join the newsletter</p>
-					<form method="POST" action="?/subscribe" use:enhance>
-						<label class="email-label" for="newsletter-email">Email address</label>
-						<div class="email-row">
-							<input id="newsletter-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required maxlength="254" />
-							<button class="btn btn-primary" type="submit">Subscribe <span aria-hidden="true">→</span></button>
-						</div>
-						<div class="honeypot" aria-hidden="true">
-							<label for="newsletter-website">Leave this field empty</label>
-							<input id="newsletter-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-						</div>
-						{#if form?.error}
-							<p class="form-error" role="alert">{form.error}</p>
-						{/if}
-						<p class="privacy-note">By subscribing, you agree to receive occasional emails. Unsubscribe anytime.</p>
-					</form>
 				{/if}
+				{#if !form?.success}<p class="panel-label">Join the newsletter</p>{/if}
+				<form
+					method="POST"
+					action="?/subscribe"
+					use:enhance={() => {
+						submitting = true;
+						return async ({ update }) => {
+							try {
+								// SvelteKit resets successful forms by default; retain the typed address.
+								await update({ reset: false });
+							} finally {
+								submitting = false;
+							}
+						};
+					}}
+				>
+					<label class="email-label" for="newsletter-email">Email address</label>
+					<div class="email-row">
+						<input id="newsletter-email" name="email" type="email" bind:value={email} placeholder="you@example.com" autocomplete="email" required maxlength="254" />
+						<button class="btn btn-primary" type="submit" disabled={submitting} aria-live="polite">
+							{#if submitting}
+								<span class="button-spinner" aria-hidden="true"></span> Subscribing…
+							{:else}
+								Subscribe <span class="subscribe-arrow" aria-hidden="true">→</span>
+							{/if}
+						</button>
+					</div>
+					<div class="honeypot" aria-hidden="true">
+						<label for="newsletter-website">Leave this field empty</label>
+						<input id="newsletter-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+					</div>
+					{#if form?.error}
+						<p class="form-error" role="alert">{form.error}</p>
+					{/if}
+					<p class="privacy-note">By subscribing, you agree to receive occasional emails. Unsubscribe anytime.</p>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -91,6 +116,7 @@
 		flex: 1;
 		padding: 0.8rem 0.9rem;
 		color: var(--color-text-primary);
+		color-scheme: dark;
 		font: inherit;
 		font-size: var(--font-size-sm);
 		background: var(--color-bg-primary);
@@ -99,8 +125,21 @@
 		transition: border-color var(--duration-base), box-shadow var(--duration-base);
 	}
 	.email-row input:focus { outline: none; border-color: var(--color-accent-1); box-shadow: 0 0 0 3px rgba(194, 151, 103, 0.13); }
+	:global([data-theme="light"]) .email-row input { color-scheme: light; }
+	.email-row input:-webkit-autofill,
+	.email-row input:-webkit-autofill:hover,
+	.email-row input:-webkit-autofill:focus {
+		-webkit-text-fill-color: var(--color-text-primary);
+		box-shadow: 0 0 0 1000px var(--color-bg-primary) inset, 0 0 0 3px rgba(194, 151, 103, 0.13);
+		transition: background-color 9999s ease-out;
+	}
 	.email-row .btn { flex: 0 0 auto; padding-inline: 18px; white-space: nowrap; }
-	.email-row button span { padding-left: 4px; }
+	.email-row .btn:disabled { opacity: 0.82; cursor: wait; transform: none; }
+	.button-spinner { width: 14px; height: 14px; border: 2px solid rgba(255, 255, 255, 0.4); border-top-color: currentColor; border-radius: 50%; animation: subscribe-spin 700ms linear infinite; }
+	@keyframes subscribe-spin { to { transform: rotate(360deg); } }
+	.email-row .subscribe-arrow { display: inline-block; padding-left: 4px; transition: transform 180ms var(--ease-out); }
+	.email-row button:hover .subscribe-arrow { transform: translateX(3px); }
+	.email-row button:active .subscribe-arrow { transform: translateX(1px); }
 	.privacy-note { margin: 12px 0 0; color: var(--color-text-muted); font-size: 0.7rem; line-height: 1.6; }
 	.form-error { margin: 12px 0 0; color: #e99b8f; font-size: var(--font-size-sm); }
 	.honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
@@ -109,6 +148,7 @@
 	.success-icon svg { width: 24px; height: 24px; }
 	.success-state h3 { margin-bottom: 7px; font-size: var(--font-size-xl); }
 	.success-state p { margin: 0 auto 8px; font-size: var(--font-size-sm); }
+	.submitted-email { color: var(--color-text-primary); font-weight: 600; overflow-wrap: anywhere; }
 	.spam-note { color: var(--color-text-muted); font-size: var(--font-size-xs); }
 	@media (max-width: 800px) {
 		.newsletter-card { grid-template-columns: 1fr; gap: var(--spacing-xl); }

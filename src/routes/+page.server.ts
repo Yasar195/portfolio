@@ -43,7 +43,7 @@ export const actions: Actions = {
 				return fail(502, { error: 'We could not process your signup right now. Please try again.' });
 			}
 
-			return { success: true };
+			return { success: true, email };
 		} catch (cause) {
 			console.error('Newsletter CMS request could not be completed:', cause);
 			return fail(502, { error: 'We could not process your signup right now. Please try again.' });
